@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q3 Display Template 2026</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            margin: 8px 0 0 0;
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .key-insights {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 5px solid #667eea;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #333;
+            border-radius: 8px;
+        }
+
+        .key-insights strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        .insight-item {
+            margin: 6px 0;
+            padding-left: 15px;
+        }
+
+        /* Route Dropdown Styles */
+        .route-dropdown {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .route-colors-1 { --color-primary: #667eea; --color-light: #f0f4ff; --color-dark: #4c51b8; }
+        .route-colors-2 { --color-primary: #f093fb; --color-light: #ffe5ff; --color-dark: #d946ef; }
+        .route-colors-3 { --color-primary: #4facfe; --color-light: #e0f7ff; --color-dark: #0ea5e9; }
+        .route-colors-4 { --color-primary: #43e97b; --color-light: #e0ffe0; --color-dark: #10b981; }
+        .route-colors-5 { --color-primary: #fa709a; --color-light: #ffe5ec; --color-dark: #ec4899; }
+        .route-colors-6 { --color-primary: #feca57; --color-light: #fffff0; --color-dark: #f59e0b; }
+
+        .route-header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-dark) 100%);
+            color: #ffffff;
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .route-header:hover {
+            box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .route-title-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .route-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .status-badge {
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .dropdown-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .route-header.active .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .route-content {
+            background-color: var(--color-light);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 20px;
+        }
+
+        .route-content.active {
+            max-height: 2000px;
+            padding: 20px;
+        }
+
+        .summary-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .summary-box {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--color-primary);
+            transition: all 0.3s ease;
+        }
+
+        .summary-box:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .summary-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .products-list {
+            margin-top: 15px;
+        }
+
+        .product-item {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .product-item:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-item:hover .product-header {
+            background-color: #f0f0f0;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+
+        .product-need {
+            font-weight: 700;
+            font-size: 14px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 50px;
+        }
+
+        .need-good {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .need-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .need-critical {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .product-toggle {
+            margin-left: 10px;
+            color: var(--color-primary);
+            font-weight: bold;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-item.expanded .product-toggle {
+            transform: rotate(90deg);
+        }
+
+        .product-details {
+            display: none;
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            border-top: 1px solid #e0e0e0;
+            background-color: #fafafa;
+        }
+
+        .product-item.expanded .product-details {
+            display: block;
+            max-height: 500px;
+            padding: 15px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        .footer {
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                max-width: 100%;
+                border-radius: 0;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .summary-row {
+                grid-template-columns: 1fr;
+            }
+
+            .route-header {
+                padding: 15px;
+            }
+
+            .route-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Q3 Display Template 2026</h1>
+            <p>EDM GEO Mixed Rural East — Display Performance Tracker</p>
+        </div>
+
+        <div class="content">
+            <div class="key-insights">
+                <strong>⚠️ Priority Actions</strong>
+                <div class="insight-item">• Routes 562937 & 562938: Critical underperformance (5-7%)</div>
+                <div class="insight-item">• CSD 6pk: 0% achievement across all routes</div>
+                <div class="insight-item">• Total displays to close: 147 across 6 routes</div>
+            </div>
+
+            <!-- ROUTE 562936 -->
+            <div class="route-dropdown route-colors-1">
+                <div class="route-header" onclick="toggleRoute(this)">
+                    <div class="route-title-section">
+                        <span class="route-title">🚚 Route 562936</span>
+                        <span class="status-badge">38%</span>
+                    </div>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="route-content">
+                    <div class="summary-row">
+                        <div class="summary-box">
+                            <div class="summary-label">Placed</div>
+                            <div class="summary-value">13</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Target</div>
+                            <div class="summary-value">40</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Gap</div>
+                            <div class="summary-value">27</div>
+                        </div>
+                    </div>
+                    <div class="products-list">
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Brisk Ubereats</span>
+                                <span class="product-need need-good">✓ Done</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Complete</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Achievement:</span>
+                                    <span class="detail-value">100%</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Gap:</span>
+                                    <span class="detail-value">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (LF)</span>
+                                <span class="product-need need-critical">+4</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">4</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Priority:</span>
+                                    <span class="detail-value">High</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (SF)</span>
+                                <span class="product-need need-critical">+5</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">5</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Priority:</span>
+                                    <span class="detail-value">High</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Gatorade Mashup</span>
+                                <span class="product-need need-critical">+8</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">8</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Priority:</span>
+                                    <span class="detail-value">Highest</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">CSD 6pk</span>
+                                <span class="product-need need-critical">+6</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">6</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Priority:</span>
+                                    <span class="detail-value">High</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 1L</span>
+                                <span class="product-need need-warning">+2</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">2</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Warning</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Priority:</span>
+                                    <span class="detail-value">Medium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 10pk</span>
+                                <span class="product-need need-critical">+1</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">1</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Priority:</span>
+                                    <span class="detail-value">Low</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROUTE 562937 -->
+            <div class="route-dropdown route-colors-2">
+                <div class="route-header" onclick="toggleRoute(this)">
+                    <div class="route-title-section">
+                        <span class="route-title">🚚 Route 562937</span>
+                        <span class="status-badge">5%</span>
+                    </div>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="route-content">
+                    <div class="summary-row">
+                        <div class="summary-box">
+                            <div class="summary-label">Placed</div>
+                            <div class="summary-value">2</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Target</div>
+                            <div class="summary-value">43</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Gap</div>
+                            <div class="summary-value">41</div>
+                        </div>
+                    </div>
+                    <div class="products-list">
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Brisk Ubereats</span>
+                                <span class="product-need need-critical">+2</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">2</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (LF)</span>
+                                <span class="product-need need-critical">+4</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">4</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (SF)</span>
+                                <span class="product-need need-critical">+10</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">10</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Gatorade Mashup</span>
+                                <span class="product-need need-critical">+11</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">11</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">CSD 6pk</span>
+                                <span class="product-need need-critical">+8</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">8</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 1L</span>
+                                <span class="product-need need-critical">+3</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">3</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 10pk</span>
+                                <span class="product-need need-critical">+3</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">3</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROUTE 562938 -->
+            <div class="route-dropdown route-colors-3">
+                <div class="route-header" onclick="toggleRoute(this)">
+                    <div class="route-title-section">
+                        <span class="route-title">🚚 Route 562938</span>
+                        <span class="status-badge">7%</span>
+                    </div>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="route-content">
+                    <div class="summary-row">
+                        <div class="summary-box">
+                            <div class="summary-label">Placed</div>
+                            <div class="summary-value">3</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Target</div>
+                            <div class="summary-value">44</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Gap</div>
+                            <div class="summary-value">41</div>
+                        </div>
+                    </div>
+                    <div class="products-list">
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Brisk Ubereats</span>
+                                <span class="product-need need-warning">+1</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">1</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Warning</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (LF)</span>
+                                <span class="product-need need-critical">+3</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">3</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (SF)</span>
+                                <span class="product-need need-critical">+9</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">9</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Gatorade Mashup</span>
+                                <span class="product-need need-critical">+12</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">12</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">CSD 6pk</span>
+                                <span class="product-need need-critical">+8</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">8</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 1L</span>
+                                <span class="product-need need-critical">+5</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">5</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 10pk</span>
+                                <span class="product-need need-critical">+3</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">3</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROUTE 562939 -->
+            <div class="route-dropdown route-colors-4">
+                <div class="route-header" onclick="toggleRoute(this)">
+                    <div class="route-title-section">
+                        <span class="route-title">🚚 Route 562939</span>
+                        <span class="status-badge">22%</span>
+                    </div>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="route-content">
+                    <div class="summary-row">
+                        <div class="summary-box">
+                            <div class="summary-label">Placed</div>
+                            <div class="summary-value">13</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Target</div>
+                            <div class="summary-value">61</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Gap</div>
+                            <div class="summary-value">48</div>
+                        </div>
+                    </div>
+                    <div class="products-list">
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Brisk Ubereats</span>
+                                <span class="product-need need-warning">+2</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">2</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Warning</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (LF)</span>
+                                <span class="product-need need-critical">+3</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">3</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (SF)</span>
+                                <span class="product-need need-critical">+12</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">12</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Gatorade Mashup</span>
+                                <span class="product-need need-critical">+12</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">12</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">CSD 6pk</span>
+                                <span class="product-need need-critical">+9</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">9</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 1L</span>
+                                <span class="product-need need-critical">+1</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">1</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 10pk</span>
+                                <span class="product-need need-warning">+1</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">1</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Warning</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROUTE 562947 -->
+            <div class="route-dropdown route-colors-5">
+                <div class="route-header" onclick="toggleRoute(this)">
+                    <div class="route-title-section">
+                        <span class="route-title">🚚 Route 562947</span>
+                        <span class="status-badge">15%</span>
+                    </div>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="route-content">
+                    <div class="summary-row">
+                        <div class="summary-box">
+                            <div class="summary-label">Placed</div>
+                            <div class="summary-value">5</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Target</div>
+                            <div class="summary-value">41</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Gap</div>
+                            <div class="summary-value">36</div>
+                        </div>
+                    </div>
+                    <div class="products-list">
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Brisk Ubereats</span>
+                                <span class="product-need need-good">✓ Done</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Complete</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Achievement:</span>
+                                    <span class="detail-value">100%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (LF)</span>
+                                <span class="product-need need-critical">+1</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">1</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (SF)</span>
+                                <span class="product-need need-critical">+6</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">6</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Gatorade Mashup</span>
+                                <span class="product-need need-critical">+8</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">8</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">CSD 6pk</span>
+                                <span class="product-need need-critical">+12</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">12</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 1L</span>
+                                <span class="product-need need-good">✓ Done</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Complete</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Achievement:</span>
+                                    <span class="detail-value">100%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 10pk</span>
+                                <span class="product-need need-good">✓ Done</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Complete</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Achievement:</span>
+                                    <span class="detail-value">100%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROUTE 564923 -->
+            <div class="route-dropdown route-colors-6">
+                <div class="route-header" onclick="toggleRoute(this)">
+                    <div class="route-title-section">
+                        <span class="route-title">🚚 Route 564923</span>
+                        <span class="status-badge">30%</span>
+                    </div>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="route-content">
+                    <div class="summary-row">
+                        <div class="summary-box">
+                            <div class="summary-label">Placed</div>
+                            <div class="summary-value">10</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Target</div>
+                            <div class="summary-value">38</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Gap</div>
+                            <div class="summary-value">28</div>
+                        </div>
+                    </div>
+                    <div class="products-list">
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Brisk Ubereats</span>
+                                <span class="product-need need-critical">+3</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">3</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (LF)</span>
+                                <span class="product-need need-critical">+3</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">3</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Alani Nu (SF)</span>
+                                <span class="product-need need-critical">+8</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">8</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Gatorade Mashup</span>
+                                <span class="product-need need-critical">+9</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">9</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">CSD 6pk</span>
+                                <span class="product-need need-critical">+4</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">4</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 1L</span>
+                                <span class="product-need need-critical">+1</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Need:</span>
+                                    <span class="detail-value">1</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item" onclick="toggleProduct(event)">
+                            <div class="product-header">
+                                <span class="product-name">Montellier 10pk</span>
+                                <span class="product-need need-good">✓ Done</span>
+                                <span class="product-toggle">›</span>
+                            </div>
+                            <div class="product-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value">Complete</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Achievement:</span>
+                                    <span class="detail-value">100%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p style="margin: 0;">Q3 Display Template 2026 — P7W1-P8W4</p>
+            <p style="margin: 5px 0 0 0;">Follow look of success for GoSpotCheck submissions</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleRoute(element) {
+            const header = element;
+            const content = header.nextElementSibling;
+            
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        function toggleProduct(event) {
+            event.stopPropagation();
+            const productItem = event.currentTarget;
+            productItem.classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>
